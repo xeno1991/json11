@@ -55,6 +55,8 @@
 #include <map>
 #include <memory>
 #include <initializer_list>
+#include <cstring>
+#include <istream>
 
 namespace json11 {
 
@@ -154,6 +156,12 @@ public:
             return nullptr;
         }
     }
+    static Json parse(std::istream & is, std::string & err){
+        std::string in, buf;
+        while(std::getline(is,buf)) in += buf;
+        return Json::parse(in, err);
+    }
+
     // Parse multiple objects, concatenated or separated by whitespace
     static std::vector<Json> parse_multi(const std::string & in, std::string & err);
 
