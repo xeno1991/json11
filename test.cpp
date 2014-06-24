@@ -7,6 +7,7 @@
 #include <list>
 #include <set>
 #include <unordered_map>
+#include <cstring>
 
 using namespace json11;
 using std::string;
@@ -23,8 +24,8 @@ CHECK_TRAIT(is_nothrow_move_assignable<Json>);
 CHECK_TRAIT(is_nothrow_destructible<Json>);
 
 void parse_from_stdin() {
-    string buf;
-    while (!std::cin.eof()) buf += std::cin.get();
+    string buf, tmp;
+    while (std::getline(std::cin, tmp)) buf += tmp;
 
     string err;
     auto json = Json::parse(buf, err);
